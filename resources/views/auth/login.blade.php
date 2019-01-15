@@ -11,6 +11,16 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        {{-- Add this block to show an error message in case of an expired token or user lockout --}}
+                        @if ($errors->has('token'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>{{ $errors->first('token') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
