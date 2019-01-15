@@ -22,3 +22,13 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->state(App\User::class, '2fa', function ($faker) {
+    return [
+        'mobile' => $faker->phoneNumber,
+    ];
+});
+
+$factory->afterCreatingState(App\User::class, '2fa', function ($user, $faker) {
+    $user->twoFactorAuth()->save(factory(MichaelDzjap\TwoFactorAuth\TwoFactorAuth::class)->make());
+});

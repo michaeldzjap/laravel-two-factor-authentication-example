@@ -10,11 +10,11 @@ use MichaelDzjap\TwoFactorAuth\TwoFactorAuthManager;
 class TwoFactorAuthManagerTest extends TestCase
 {
     /**
-     * Verify the correct default provider is returned.
+     * Verify that the correct default provider is returned.
      *
      * @return void
      */
-    public function testDefaultProvider(): void
+    public function testDefaultProvider() : void
     {
         $manager = resolve(TwoFactorAuthManager::class);
 
