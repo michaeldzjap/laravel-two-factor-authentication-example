@@ -16,7 +16,7 @@ class TwoFactorAuthenticationTest extends DuskTestCase
      *
      * @return void
      */
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
 
@@ -41,7 +41,7 @@ class TwoFactorAuthenticationTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/login')
                     ->type('email', $user->email)
-                    ->type('password', 'secret')
+                    ->type('password', 'password')
                     ->press('Login')
                     ->assertPathIs('/home');
         });
@@ -63,7 +63,7 @@ class TwoFactorAuthenticationTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/login')
                     ->type('email', $user->email)
-                    ->type('password', 'secret')
+                    ->type('password', 'password')
                     ->press('Login')
                     ->assertPathIs('/auth/token')
                     ->type('token', 333)
@@ -90,7 +90,7 @@ class TwoFactorAuthenticationTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit('/login')
                     ->type('email', $user->email)
-                    ->type('password', 'secret')
+                    ->type('password', 'password')
                     ->press('Login')
                     ->assertPathIs('/auth/token')
                     ->type('token', 'abc')

@@ -66,6 +66,13 @@ return [
             'block_for' => null,
         ],
 
+        'dusk-connection' => [
+            'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'dusk',
+            'retry_after' => 90,
+        ],
+
     ],
 
     /*
