@@ -4,6 +4,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Enabled
+    |--------------------------------------------------------------------------
+    |
+    | Options:
+    |
+    | - 'always': Always require two-factor authentication.
+    | - 'never': Never require two-factor authentication.
+    | - 'user': Specify manually for which users to enable 2fa.
+    |
+    */
+
+    'enabled' => 'user',
+
+    /*
+    |--------------------------------------------------------------------------
     | Default Two-Factor Authentication Provider
     |--------------------------------------------------------------------------
     |
@@ -57,31 +72,31 @@ return [
     */
 
     'routes' => [
+
         'get' => [
             'url' => '/auth/token',
             'name' => 'auth.token',
         ],
+
         'post' => '/auth/token',
+
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Database Settings
+    | Model Setttings
     |--------------------------------------------------------------------------
     |
-    | Starting from Laravel 5.8, the default is to use "bigIncrements" instead
-    | of "increments" for the "id" column on the "users" table. This setting
-    | allows you to control what type to use for the "user_id" column on the
-    | "two_factor_auths" table. The default is to use "unsignedBigInteger" in
-    | order to stay in line with the changes in Laravel 5.8.
-    |
-    | NOTE: Modifying this setting only has an effect before you run any
-    | migrations for this package. If you need to change the signature of
-    | "user_id" afterwards, you will have to write your own migration for this
-    | (see install instructions for more details).
+    | Here you can specify some custom properties of the default user model.
     |
     */
 
-    'big_int' => true,
+    'models' => [
+
+        'user' => [
+            'primaryKey' => 'id',
+        ],
+
+    ],
 
 ];
