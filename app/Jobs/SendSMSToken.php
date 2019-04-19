@@ -42,10 +42,10 @@ class SendSMSToken implements ShouldQueue
     /**
      * Execute the job.
      *
-     * @param  \MichaelDzjap\TwoFactorAuth\Contracts\TwoFactorProvider $provider
+     * @param  \MichaelDzjap\TwoFactorAuth\Contracts\TwoFactorProvider  $provider
      * @return void
      */
-    public function handle(TwoFactorProvider $provider)
+    public function handle(TwoFactorProvider $provider) : void
     {
         $provider->sendSMSToken($this->user);
     }
