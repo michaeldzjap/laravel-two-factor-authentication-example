@@ -990,12 +990,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/michaeldzjap/laravel-two-factor-authentication.git",
-                "reference": "058d130795c926d399e8bc9630075f13b91a65af"
+                "reference": "ad3e8eee447bd4b5a77b330a1088417260abb856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michaeldzjap/laravel-two-factor-authentication/zipball/058d130795c926d399e8bc9630075f13b91a65af",
-                "reference": "058d130795c926d399e8bc9630075f13b91a65af",
+                "url": "https://api.github.com/repos/michaeldzjap/laravel-two-factor-authentication/zipball/ad3e8eee447bd4b5a77b330a1088417260abb856",
+                "reference": "ad3e8eee447bd4b5a77b330a1088417260abb856",
                 "shasum": ""
             },
             "require": {
@@ -1033,7 +1033,7 @@
                 "messagebird",
                 "two-factor"
             ],
-            "time": "2019-04-19T08:41:54+00:00"
+            "time": "2019-04-19T08:55:56+00:00"
         },
         {
             "name": "monolog/monolog",
