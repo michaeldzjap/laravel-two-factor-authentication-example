@@ -14,7 +14,7 @@ class TwoFactorProviderTest extends TestCase
     /**
      * The two-factor authentication provider implementation.
      *
-     * @var TwoFactorProvider
+     * @var \MichaelDzjap\TwoFactorAuth\Contracts\TwoFactorProvider
      */
     private $provider;
 
