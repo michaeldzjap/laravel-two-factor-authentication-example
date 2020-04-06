@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendSMSToken;
 use App\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use MichaelDzjap\TwoFactorAuth\Contracts\TwoFactorProvider;
@@ -29,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * The two-factor authentication provider implementation.
@@ -61,7 +62,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($this->provider->enabled($user)) {
-            return self::startTwoFactorAuthProcess($request, $user);
+            return $this->startTwoFactorAuthProcess($request, $user);
         }
 
         return redirect()->intended($this->redirectPath());
@@ -82,7 +83,7 @@ class LoginController extends Controller
             'two-factor:auth', array_merge(['id' => $user->id], $request->only('email', 'remember'))
         );
 
-        self::registerUserAndSendToken($user);
+        $this->registerUserAndSendToken($user);
 
         return redirect()->route('auth.token');
     }
