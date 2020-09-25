@@ -3,8 +3,9 @@
 namespace Tests\Browser;
 
 use App\Jobs\SendSMSToken;
-use Laravel\Dusk\Browser;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class TwoFactorAuthenticationTest extends DuskTestCase
@@ -34,7 +35,7 @@ class TwoFactorAuthenticationTest extends DuskTestCase
      */
     public function testRedirectToHome() : void
     {
-        $user = factory(\App\User::class)->create([
+        $user = User::factory()->create([
             'email' => 'riley.martin@space.com',
         ]);
 
@@ -56,7 +57,7 @@ class TwoFactorAuthenticationTest extends DuskTestCase
      */
     public function testRedirectToHomeAfterTwoFactorAuth() : void
     {
-        $user = factory(\App\User::class)->states('2fa')->create([
+        $user = User::factory()->twoFactor()->create([
             'email' => 'riley.martin@space.com',
         ]);
 
@@ -83,7 +84,7 @@ class TwoFactorAuthenticationTest extends DuskTestCase
      */
     public function testFailTwoFactorAuth() : void
     {
-        $user = factory(\App\User::class)->states('2fa')->create([
+        $user = User::factory()->twoFactor()->create([
             'email' => 'riley.martin@space.com',
         ]);
 
