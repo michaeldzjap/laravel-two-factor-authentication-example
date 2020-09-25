@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -31,7 +31,7 @@ class SendSMSToken implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return void
      */
     public function __construct(User $user)

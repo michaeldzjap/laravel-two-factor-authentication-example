@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use MichaelDzjap\TwoFactorAuth\TwoFactorAuth;
+use MichaelDzjap\TwoFactorAuth\Models\TwoFactorAuth;
 
 class UserFactory extends Factory
 {
