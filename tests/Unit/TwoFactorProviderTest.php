@@ -2,10 +2,11 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use MichaelDzjap\TwoFactorAuth\Contracts\TwoFactorProvider;
+use Tests\TestCase;
 
 class TwoFactorProviderTest extends TestCase
 {
@@ -37,8 +38,8 @@ class TwoFactorProviderTest extends TestCase
      */
     public function testTwoFactorAuthEnabled() : void
     {
-        $user1 = factory(\App\User::class)->create();
-        $user2 = factory(\App\User::class)->states('2fa')->create();
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->twoFactor()->create();
 
         $this->assertFalse($this->provider->enabled($user1));
         $this->assertTrue($this->provider->enabled($user2));

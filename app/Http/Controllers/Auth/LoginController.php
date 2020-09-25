@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\SendSMSToken;
-use App\User;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -72,7 +72,7 @@ class LoginController extends Controller
      * Log out the user and start the two factor authentication state.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\User $user
+     * @param  \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     private function startTwoFactorAuthProcess(Request $request, $user)
@@ -92,7 +92,7 @@ class LoginController extends Controller
      * Provider specific two-factor authentication logic. In the case of
      * MessageBird we just want to send an authentication token via SMS.
      *
-     * @param  \App\User $user
+     * @param  \App\Models\User $user
      * @return mixed
      */
     private function registerUserAndSendToken(User $user)
