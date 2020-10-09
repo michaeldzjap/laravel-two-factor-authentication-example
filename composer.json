@@ -16,6 +16,7 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
+        "messagebird/php-rest-api": "^1.19",
         "michaeldzjap/twofactor-auth": "dev-develop"
     },
     "require-dev": {
@@ -65,7 +66,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "/home/vagrant/code/laravel/laravel-two-factor-authentication",
+            "url": "../laravel-two-factor-authentication",
             "options": {
                 "symlink": true
             }
