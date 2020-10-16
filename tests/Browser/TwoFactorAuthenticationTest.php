@@ -17,7 +17,7 @@ class TwoFactorAuthenticationTest extends DuskTestCase
      *
      * @return void
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -33,13 +33,13 @@ class TwoFactorAuthenticationTest extends DuskTestCase
      *
      * @return void
      */
-    public function testRedirectToHome() : void
+    public function testRedirectToHome(): void
     {
         $user = User::factory()->create([
             'email' => 'riley.martin@space.com',
         ]);
 
-        $this->browse(function (Browser $browser) use ($user) {
+        $this->browse(function (Browser $browser) use ($user): void {
             $browser->visit('/login')
                     ->type('email', $user->email)
                     ->type('password', 'password')
@@ -55,13 +55,13 @@ class TwoFactorAuthenticationTest extends DuskTestCase
      *
      * @return void
      */
-    public function testRedirectToHomeAfterTwoFactorAuth() : void
+    public function testRedirectToHomeAfterTwoFactorAuth(): void
     {
         $user = User::factory()->twoFactor()->create([
             'email' => 'riley.martin@space.com',
         ]);
 
-        $this->browse(function (Browser $browser) use ($user) {
+        $this->browse(function (Browser $browser) use ($user): void {
             $browser->visit('/login')
                     ->type('email', $user->email)
                     ->type('password', 'password')
@@ -82,13 +82,13 @@ class TwoFactorAuthenticationTest extends DuskTestCase
      *
      * @return void
      */
-    public function testFailTwoFactorAuth() : void
+    public function testFailTwoFactorAuth(): void
     {
         $user = User::factory()->twoFactor()->create([
             'email' => 'riley.martin@space.com',
         ]);
 
-        $this->browse(function (Browser $browser) use ($user) {
+        $this->browse(function (Browser $browser) use ($user): void {
             $browser->visit('/login')
                     ->type('email', $user->email)
                     ->type('password', 'password')
