@@ -67,7 +67,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "/home/vagrant/code/laravel/laravel-two-factor-authentication",
+            "url": "../laravel-two-factor-authentication",
             "options": {
                 "symlink": true
             }
