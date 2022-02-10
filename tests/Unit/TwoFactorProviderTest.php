@@ -36,7 +36,7 @@ class TwoFactorProviderTest extends TestCase
      *
      * @return void
      */
-    public function testTwoFactorAuthEnabled() : void
+    public function test_two_factor_auth_enabled() : void
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->twoFactor()->create();
