@@ -2124,7 +2124,7 @@
                 "reference": "7522b8da42d31e810da6747752dbf84c0e9ba6a7"
             },
             "require": {
-                "illuminate/support": "^9.0"
+                "illuminate/support": "^8.0 || ^9.0"
             },
             "type": "package",
             "extra": {
