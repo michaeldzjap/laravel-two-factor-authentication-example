@@ -14,7 +14,7 @@ class TwoFactorAuthManagerTest extends TestCase
      *
      * @return void
      */
-    public function testDefaultProvider() : void
+    public function test_default_provider() : void
     {
         $manager = resolve(TwoFactorAuthManager::class);
 
