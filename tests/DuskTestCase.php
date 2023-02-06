@@ -2,10 +2,11 @@
 
 namespace Tests;
 
-use Laravel\Dusk\TestCase as BaseTestCase;
+use Illuminate\Support\Collection;
 use Facebook\WebDriver\Chrome\ChromeOptions;
-use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Laravel\Dusk\TestCase as BaseTestCase;
 
 abstract class DuskTestCase extends BaseTestCase
 {
@@ -15,40 +16,61 @@ abstract class DuskTestCase extends BaseTestCase
      * Prepare for Dusk test execution.
      *
      * @beforeClass
-     * @return void
      */
-    public static function prepare()
+    public static function prepare(): void
     {
-        static::startChromeDriver();
+        if (! static::runningInSail()) {
+            static::startChromeDriver();
+        }
     }
 
     /**
      * Create the RemoteWebDriver instance.
-     *
-     * @return \Facebook\WebDriver\Remote\RemoteWebDriver
      */
-    protected function driver()
+    protected function driver(): RemoteWebDriver
     {
-        $options = (new ChromeOptions)->addArguments([
-            '--disable-gpu',
-            '--headless',
-            '--window-size=1920,1080',
-        ]);
+        $options = (new ChromeOptions)->addArguments(collect([
+            $this->shouldStartMaximized() ? '--start-maximized' : '--window-size=1920,1080',
+        ])->unless($this->hasHeadlessDisabled(), function (Collection $items) {
+            return $items->merge([
+                '--disable-gpu',
+                '--headless',
+            ]);
+        })->all());
 
         return RemoteWebDriver::create(
-            'http://localhost:9515', DesiredCapabilities::chrome()->setCapability(
+            $_ENV['DUSK_DRIVER_URL'] ?? 'http://localhost:9515',
+            DesiredCapabilities::chrome()->setCapability(
                 ChromeOptions::CAPABILITY, $options
             )
         );
     }
 
     /**
+     * Determine whether the Dusk command has disabled headless mode.
+     */
+    protected function hasHeadlessDisabled(): bool
+    {
+        return isset($_SERVER['DUSK_HEADLESS_DISABLED']) ||
+               isset($_ENV['DUSK_HEADLESS_DISABLED']);
+    }
+
+    /**
+     * Determine if the browser window should start maximized.
+     */
+    protected function shouldStartMaximized(): bool
+    {
+        return isset($_SERVER['DUSK_START_MAXIMIZED']) ||
+               isset($_ENV['DUSK_START_MAXIMIZED']);
+    }
+
+    /**
      * Asserts that Jobs are in Queue to be dispatched.
      *
-     * @param  array|string  $queued
+     * @param  array<int, string>|string  $queued
      * @return void
      */
-    public function assertQueued($queued) : void
+    public function assertQueued($queued): void
     {
         if (!is_array($queued)) {
             $queued = func_get_args();
