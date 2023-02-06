@@ -33,19 +33,12 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-     * The two-factor authentication provider implementation.
-     *
-     * @var TwoFactorProvider
-     */
-    private $provider;
-
-    /**
      * Create a new controller instance.
      *
      * @param  \MichaelDzjap\TwoFactorAuth\Contracts\TwoFactorProvider  $provider
      * @return void
      */
-    public function __construct(TwoFactorProvider $provider)
+    public function __construct(private TwoFactorProvider $provider)
     {
         $this->middleware('guest')->except('logout');
 
@@ -61,6 +54,8 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+        info($this->provider->enabled($user) ? 'YES' : 'NO');
+
         if ($this->provider->enabled($user)) {
             return $this->startTwoFactorAuthProcess($request, $user);
         }
